@@ -189,3 +189,88 @@ System.out.println(result);
 - Use switch for multiple equality checks.
 - Always include a default case in switch.
 - Ternary operator is good for short, simple conditions.
+
+# Loops
+
+## 1. What are Loops?
+Loops allow us to execute a block of code repeatedly until a condition is true.  
+They help reduce code duplication and improve efficiency.
+
+---
+
+### 2.1 `for` Loop
+- Used when the number of iterations is known in advance.
+- Syntax:
+  ```java
+  for (initialization; condition; update) {
+      // code to be executed
+  }
+  ```
+
+### 2.2 while Loop
+- Used when the number of iterations is not known in advance,
+- but depends on a condition.
+- Syntax
+  ```java
+  while (condition) {
+    // code to be executed
+   }
+  ```
+
+### 2.3 do-while Loop
+- Similar to while, but ensures the code runs at least once even if the condition is false.
+- Condition is checked after executing the loop body.
+- Example
+  ```java
+  int i = 1;
+  do {
+       System.out.println("Number: " + i);
+       i++;
+   } while (i <= 5);
+  ```
+### 2.4 Enhanced for Loop (for-each)
+- Used for iterating over arrays and collections.
+- Easier and cleaner than traditional for.
+- Example
+```java
+int[] numbers = {10, 20, 30, 40};
+
+for (int num : numbers) {
+    System.out.println(num);
+}
+```
+
+### 3. Loop Control Statements
+1. **break** – exits the loop immediately.
+```java
+for (int i = 1; i <= 5; i++) {
+    if (i == 3) break;
+    System.out.println(i);
+}
+// Output: 1, 2
+```
+
+2. **continue** – skips the current iteration and jumps to the next.
+```java
+for (int i = 1; i <= 5; i++) {
+    if (i == 3) continue;
+    System.out.println(i);
+}
+// Output: 1, 2, 4, 5
+```
+
+3. **nested loops** – loop inside another loop.
+```java
+for (int i = 1; i <= 3; i++) {
+    for (int j = 1; j <= 3; j++) {
+        System.out.println("i = " + i + ", j = " + j);
+    }
+}
+```
+
+### 4. Best Practices
+- Use for loop when you know the number of iterations.
+- Use while/do-while when iterations depend on runtime conditions.
+- Use enhanced for for arrays/collections (cleaner code).
+- Avoid infinite loops unless required (while(true) for servers, event listeners, etc.).
+- Always ensure loop condition updates to prevent infinite loops.
