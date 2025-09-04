@@ -274,3 +274,185 @@ for (int i = 1; i <= 3; i++) {
 - Use enhanced for for arrays/collections (cleaner code).
 - Avoid infinite loops unless required (while(true) for servers, event listeners, etc.).
 - Always ensure loop condition updates to prevent infinite loops.
+
+# Arrays
+
+## 1. What is an Array?
+- An **array** is a collection of elements of the same type stored in a contiguous memory location.
+- Arrays in Java are **objects**.
+- Array size is fixed (cannot grow or shrink).
+- Indexing starts from **0**.
+
+---
+
+## 2. Declaring and Initializing Arrays
+
+### 2.1 Declaration
+```java
+int[] arr;      // preferred way
+int arr2[];     // also valid
+```
+
+### 2.2 Memory Allocation
+```java
+arr = new int[5];   // array of size 5, default values = 0
+```
+
+### 2.3 Declaration + Initialization
+```java
+int[] numbers = {10, 20, 30, 40, 50};
+```
+
+### 3. Accessing Array Elements
+```java
+int[] marks = {95, 85, 76, 64};
+System.out.println(marks[0]); // Output: 95
+marks[2] = 80;                // update element
+```
+
+### 4. Array Length
+```java
+int[] arr = {1, 2, 3, 4, 5};
+System.out.println(arr.length);  // Output: 5
+```
+
+## 5. Iterating Through Arrays
+### 5.1 Using for loop
+```java
+int[] arr = {1, 2, 3, 4, 5};
+for (int i = 0; i < arr.length; i++) {
+    System.out.println(arr[i]);
+}
+```
+
+### 5.2 Using Enhanced for loop (for-each)
+```java
+for (int num : arr) {
+    System.out.println(num);
+}
+```
+
+## 6. Types of Arrays
+### 6.1 One-Dimensional Array
+```java
+int[] arr = new int[5];
+```
+
+### 6.2 Multi-Dimensional Array
+```java
+int[][] matrix = {
+    {1, 2, 3},
+    {4, 5, 6}
+};
+
+System.out.println(matrix[0][2]); // Output: 3
+```
+
+### 7. Common Array Methods (via Arrays class)
+```java
+import java.util.Arrays;
+
+int[] arr = {5, 2, 8, 1};
+
+// Sorting
+Arrays.sort(arr);
+
+// Searching
+int index = Arrays.binarySearch(arr, 8);
+
+// Filling
+Arrays.fill(arr, 0);
+```
+
+### 8. Limitations of Arrays
+- Fixed size (cannot resize after creation).
+- Only stores elements of the same type.
+- For dynamic arrays, use ArrayList or other collections.
+
+
+# Strings
+
+## 1. What is a String?
+- A **String** in Java is a sequence of characters.
+- Strings are **immutable** (once created, they cannot be changed).
+- Stored in **String Pool** (special memory area inside Heap).
+
+---
+
+## 2. Creating Strings
+
+### 2.1 Using String Literal (preferred way)
+```java
+String str1 = "Hello";
+```
+- Stored in the String Pool.
+- If the same literal is reused, JVM does not create a new object.
+
+### 2.2 Using new keyword
+```java
+String str2 = new String("Hello");
+```
+- Always creates a new object in Heap, even if the same value exists.
+
+### 3. Common String Methods
+```java
+String s = "Java Programming";
+
+// 1. Length
+System.out.println(s.length()); // 16
+
+// 2. Character at index
+System.out.println(s.charAt(0)); // J
+
+// 3. Substring
+System.out.println(s.substring(5));     // Programming
+System.out.println(s.substring(0, 4));  // Java
+
+// 4. Concatenation
+String s1 = "Java";
+String s2 = "Rocks";
+System.out.println(s1 + " " + s2);      // Java Rocks
+
+// 5. Contains
+System.out.println(s.contains("Pro"));  // true
+
+// 6. Equals vs ==
+String a = "Hello";
+String b = "Hello";
+String c = new String("Hello");
+
+System.out.println(a == b);      // true (same pool object)
+System.out.println(a == c);      // false (different object)
+System.out.println(a.equals(c)); // true (content check)
+
+// 7. Ignore Case Comparison
+System.out.println("java".equalsIgnoreCase("JAVA")); // true
+
+// 8.Replace
+System.out.println(s.replace("Java", "C++")); // C++ Programming
+
+// 9. Split
+String data = "apple,banana,grapes";
+String[] fruits = data.split(",");
+
+// 10. Trim (remove spaces)
+String s3 = "   Hello World   ";
+System.out.println(s3.trim());  // "Hello World"
+```
+
+### 4. StringBuilder and StringBuffer
+- Since String is immutable, repeated modifications create new objects.
+- **StringBuilder** (faster, not thread-safe) and **StringBuffer** (thread-safe) are used for mutable strings.
+
+### Example with StringBuilder:
+```java
+StringBuilder sb = new StringBuilder("Hello");
+sb.append(" World");
+System.out.println(sb); // Hello World
+```
+
+### 5. Best Practices
+- Use String literals for reuse and efficiency.
+- Use StringBuilder for heavy modifications inside loops.
+- Always prefer equals() for comparison, not ==.
+- Remember: Strings are immutable.
