@@ -456,3 +456,12 @@ System.out.println(sb); // Hello World
 - Use StringBuilder for heavy modifications inside loops.
 - Always prefer equals() for comparison, not ==.
 - Remember: Strings are immutable.
+
+# Exception Handling
+
+## 1. What is an Exception?
+- An **exception** is an unwanted event that disrupts the normal flow of a program.  
+- Exceptions occur during **runtime** (not compile time).  
+- Java provides a robust **exception handling mechanism** using `try-catch-finally`.
+
+---
