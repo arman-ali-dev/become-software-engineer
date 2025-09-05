@@ -465,3 +465,142 @@ System.out.println(sb); // Hello World
 - Java provides a robust **exception handling mechanism** using `try-catch-finally`.
 
 ---
+
+## 2. Types of Exceptions
+
+1. **Checked Exceptions**
+   - Checked at **compile time**.  
+   - Must be handled using `try-catch` or declared with `throws`.  
+   - Example: `IOException`, `SQLException`.
+
+2. **Unchecked Exceptions**
+   - Occur at **runtime**.  
+   - Subclasses of `RuntimeException`.  
+   - Example: `NullPointerException`, `ArithmeticException`, `ArrayIndexOutOfBoundsException`.
+
+3. **Errors**
+   - Serious issues, not recoverable.  
+   - Example: `OutOfMemoryError`, `StackOverflowError`.
+
+---
+
+
+## 3. Exception Hierarchy
+Object  
+ └── Throwable  
+      ├── Error (serious problems, handle nahi karte)  
+      └── Exception  
+           ├── Checked Exceptions  
+           │    ├── IOException  
+           │    ├── SQLException  
+           │    └── ...  
+           └── Unchecked Exceptions (RuntimeException)  
+                ├── NullPointerException  
+                ├── ArithmeticException  
+                ├── ArrayIndexOutOfBoundsException  
+                └── ...
+1. **Throwable**
+     - Ye root class hai sab exceptions aur errors ki.
+  
+2. **Error**
+      - System-level problems (e.g. OutOfMemoryError, StackOverflowError).
+      - Inhe handle karna recommended nahi hai.
+
+3. **Exception**
+      - Ye wo issues hote hain jo aapke code me aa sakte hain aur aap handle kar sakte ho.
+      - Checked Exceptions → Compiler force karta hai ki handle karo.
+      - Examples: IOException, SQLException.
+      - **Unchecked Exceptions** →
+      - Ye RuntimeException ke subclasses hote hain, compiler force nahi karta.
+      - Examples: NullPointerException, ArithmeticException, ArrayIndexOutOfBoundsException.
+  
+
+## 4. Handling Exceptions
+
+### 4.1 try-catch Block
+```java
+try {
+    int a = 10 / 0;
+} catch (ArithmeticException e) {
+    System.out.println("Cannot divide by zero!");
+}
+```
+
+### 4.2 Multiple catch Blocks
+```java
+try {
+    int arr[] = new int[5];
+    arr[6] = 10;
+} catch (ArrayIndexOutOfBoundsException e) {
+    System.out.println("Array index issue!");
+} catch (Exception e) {
+    System.out.println("Some other exception occurred.");
+}
+```
+
+### 4.3 finally Block 
+   - Executes always (even if exception occurs or not).
+```java
+try {
+    int a = 5 / 0;
+} catch (ArithmeticException e) {
+    System.out.println("Error: " + e);
+} finally {
+    System.out.println("Finally block executed.");
+}
+```
+
+### 4.4 try-with-resources (Java 7+)
+   - Used to auto-close resources like files, sockets, DB connections.
+```java
+try (FileReader fr = new FileReader("file.txt")) {
+    // use file
+} catch (IOException e) {
+    e.printStackTrace();
+}
+// Agar error na aaye → file apne aap close ho jaayegi.
+// Agar error aa bhi jaaye → tab bhi file close ho jaayegi (finally block ki tarah).
+```
+
+### 5. Throw and Throws
+1. **throw** – used to explicitly throw an exception.
+```java
+throw new ArithmeticException("Division by zero not allowed!");
+```
+
+2. **throws** – used in method signature to declare exceptions.
+```java
+void readFile() throws IOException {
+    FileReader fr = new FileReader("abc.txt");
+}
+```
+
+### 6. Custom Exceptions
+   - You can create your own exception by extending Exception or RuntimeException.
+```java
+class AgeException extends Exception {
+    AgeException(String msg) {
+        super(msg);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+            int age = 15;
+            if (age < 18) {
+                throw new AgeException("Age must be 18 or above!");
+            }
+        } catch (AgeException e) {
+            System.out.println("Caught: " + e.getMessage());
+        }
+    }
+}
+```
+
+### 7. Best Practices
+1. Always catch the most specific exception first.
+2. Avoid empty catch blocks.
+3. Use finally or try-with-resources for closing resources.
+4. Create custom exceptions only when necessary.
+5. Don’t overuse exceptions for normal control flow.
