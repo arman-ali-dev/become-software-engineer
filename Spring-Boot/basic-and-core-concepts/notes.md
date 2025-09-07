@@ -232,3 +232,4 @@ logging:
 - application.properties → Simple key-value, easy for small apps.
 - application.yml → Hierarchical, clean, better for complex configs.
 - Both supported by Spring Boot, but .properties wins if conflict occurs.
+
